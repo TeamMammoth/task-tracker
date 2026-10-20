@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta name="description" content="A calm, simple place to keep track of what needs doing.">
+    <title>Daymark — a little less to remember</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <a class="wordmark" href="./" aria-label="Daymark home">
+          <span class="wordmark-mark" aria-hidden="true">d</span>
+          <span>daymark</span>
+        </a>
+        <p class="header-note">A little less to remember.</p>
+      </header>
+
+      <section class="tracker" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow">YOUR SPACE</p>
+          <h1 id="page-title">Make room<br>for what matters.</h1>
+          <p class="intro-copy">One thing at a time is plenty.</p>
+        </div>
+
+        <form class="task-form" id="task-form">
+          <label class="visually-hidden" for="task-input">Add a task</label>
+          <input
+            id="task-input"
+            name="task"
+            type="text"
+            placeholder="What would you like to get done?"
+            maxlength="180"
+            autocomplete="off"
+            required
+          >
+          <button class="add-button" type="submit">
+            <span aria-hidden="true">+</span>
+            <span>Add task</span>
+          </button>
+        </form>
+
+        <div class="list-heading">
+          <h2 id="list-title">Your tasks</h2>
+          <span class="total-count" id="total-count" aria-live="polite">0</span>
+        </div>
+
+        <nav class="filters" aria-label="Filter tasks">
+          <button class="filter-button is-selected" type="button" data-filter="all" aria-pressed="true">
+            All <span class="filter-count" data-count="all">0</span>
+          </button>
+          <button class="filter-button" type="button" data-filter="active" aria-pressed="false">
+            Active <span class="filter-count" data-count="active">0</span>
+          </button>
+          <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">
+            Done <span class="filter-count" data-count="completed">0</span>
+          </button>
+        </nav>
+
+        <ul class="task-list" id="task-list" aria-labelledby="list-title"></ul>
+        <div class="empty-state" id="empty-state">
+          <span class="empty-icon" aria-hidden="true">✳</span>
+          <p class="empty-title">Nothing on your list.</p>
+          <p class="empty-copy">Add a task above and take it from there.</p>
+        </div>
+
+        <footer class="list-footer">
+          <p id="remaining-count" aria-live="polite">Nothing waiting</p>
+          <button class="clear-button" id="clear-completed" type="button" hidden>Clear completed</button>
+        </footer>
+        <p class="visually-hidden" id="app-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <footer class="page-footer">
+        <span>Keep it simple.</span>
+        <span>Made for today <span aria-hidden="true">·</span></span>
+      </footer>
+    </main>
+  </body>
+</html>
