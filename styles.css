@@ -37,6 +37,20 @@ button {
   color: inherit;
 }
 
+.add-button,
+.filter-button,
+.delete-button,
+.clear-button {
+  transition: background 140ms ease, color 140ms ease, opacity 140ms ease,
+    transform 140ms ease, filter 140ms ease;
+  touch-action: manipulation;
+}
+
+button:active {
+  transform: scale(0.97);
+  filter: brightness(0.94);
+}
+
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
@@ -167,15 +181,10 @@ a:focus-visible {
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
-  transition: background 140ms ease, transform 140ms ease;
 }
 
 .add-button:hover {
   background: var(--green-dark);
-}
-
-.add-button:active {
-  transform: translateY(1px);
 }
 
 .add-button > span:first-child {
@@ -230,7 +239,6 @@ a:focus-visible {
   color: var(--muted);
   cursor: pointer;
   font-size: 11px;
-  transition: background 140ms ease, color 140ms ease;
 }
 
 .filter-button:hover {
@@ -262,7 +270,10 @@ a:focus-visible {
   align-items: center;
   gap: 12px;
   border-bottom: 1px solid #f0f1ee;
-  animation: appear 160ms ease-out;
+}
+
+.task-item.is-completing {
+  animation: completion-pulse 260ms ease-out;
 }
 
 .task-toggle {
@@ -278,7 +289,7 @@ a:focus-visible {
   border-radius: 6px;
   background: white;
   cursor: pointer;
-  transition: border-color 140ms ease, background 140ms ease;
+  transition: border-color 220ms ease, background 220ms ease;
 }
 
 .task-toggle:hover {
@@ -290,13 +301,20 @@ a:focus-visible {
   background: var(--green);
 }
 
-.task-toggle:checked::after {
+.task-toggle::after {
   width: 8px;
   height: 4px;
   border-bottom: 1.6px solid white;
   border-left: 1.6px solid white;
   content: "";
-  transform: translateY(-1px) rotate(-45deg);
+  opacity: 0;
+  transform: translateY(-1px) rotate(-45deg) scale(0.6);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.task-toggle:checked::after {
+  opacity: 1;
+  transform: translateY(-1px) rotate(-45deg) scale(1);
 }
 
 .task-text {
@@ -306,11 +324,13 @@ a:focus-visible {
   color: #3b4640;
   font-size: 13px;
   line-height: 1.5;
+  text-decoration: line-through;
+  text-decoration-color: transparent;
+  transition: color 240ms ease, text-decoration-color 240ms ease;
 }
 
 .task-item.is-completed .task-text {
   color: #a2a9a2;
-  text-decoration: line-through;
   text-decoration-color: #b9c0b8;
 }
 
@@ -327,7 +347,6 @@ a:focus-visible {
   color: #a4aaa4;
   cursor: pointer;
   opacity: 0;
-  transition: background 140ms ease, color 140ms ease, opacity 140ms ease;
 }
 
 .task-item:hover .delete-button,
@@ -427,15 +446,13 @@ a:focus-visible {
   display: none !important;
 }
 
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
+@keyframes completion-pulse {
+  40% {
+    background-color: var(--green-pale);
   }
 
   to {
-    opacity: 1;
-    transform: translateY(0);
+    background-color: transparent;
   }
 }
 
@@ -495,13 +512,27 @@ a:focus-visible {
   }
 }
 
+@media (hover: none) {
+  .delete-button {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  button:active {
+    transform: none;
+  }
+
+  .task-toggle::after,
+  .task-toggle:checked::after {
+    transform: translateY(-1px) rotate(-45deg);
+  }
+
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
 }
