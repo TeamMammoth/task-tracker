@@ -203,6 +203,7 @@ function animateTaskRow(id, row, entering, isNew = false) {
 function updateTaskElement(item, task) {
   const wasCompleted = item.classList.contains("is-completed");
   item.classList.toggle("is-completed", task.completed);
+  item.dataset.completed = String(task.completed);
   if (!wasCompleted || !task.completed) {
     item.classList.toggle("is-completing", task.completed);
   }
@@ -214,6 +215,8 @@ function updateTaskElement(item, task) {
 function createTaskElement(task) {
   const item = document.createElement("li");
   item.className = "task-item";
+  item.dataset.testid = "task-item";
+  item.dataset.completed = String(task.completed);
   item.classList.toggle("is-completed", task.completed);
 
   const checkbox = document.createElement("input");
