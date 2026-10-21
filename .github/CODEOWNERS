@@ -1,5 +1,5 @@
 # Review changes to GitHub Actions workflows.
-/.github/workflows/ @reviewer-username
+/.github/workflows/ @mammothinteractive
 
 # Review changes to ownership rules.
-/.github/CODEOWNERS @reviewer-username
+/.github/CODEOWNERS @mammothinteractive
