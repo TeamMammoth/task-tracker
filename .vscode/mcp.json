@@ -1,0 +1,16 @@
+{
+	"servers": {
+		"simple-demo": {
+			"type": "stdio",
+			"command": "${workspaceFolder}/.venv/bin/python",
+			"args": [
+				"${workspaceFolder}/server.py"
+			]
+		},
+		"my-mcp-server-e792bdab": {
+			"url": "https://api.githubcopilot.com/mcp/",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
