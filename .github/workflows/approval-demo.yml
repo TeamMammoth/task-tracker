@@ -1,0 +1,12 @@
+name: Approval demo
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - run: echo "Approved. Deployment would run here."
