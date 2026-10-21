@@ -11,11 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.generate.outputs.version }}
+    #   JOB OUTPUT - prepare exposes that version. release waits through needs: prepare and reads needs.prepare.outputs.version.
 
     steps:
       - name: Generate a version
         id: generate
         run: echo "version=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+    #   STEP OUTPUT -  generate writes version to $GITHUB_OUTPUT. The next step reads steps.generate.outputs.version.
 
       - name: Read the step output
         env:
@@ -27,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RELEASE_MODE: preview
+    #   ENV VAR - RELEASE_MODE configures whether the command uses preview behavior.
 
     steps:
       - name: Read the job output and runtime configuration
