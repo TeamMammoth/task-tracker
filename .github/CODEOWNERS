@@ -1,5 +1,2 @@
-# Review changes to GitHub Actions workflows.
-/.github/workflows/ @mammothinteractive
-
-# Review changes to ownership rules.
-/.github/CODEOWNERS @mammothinteractive
+/.github/workflows/ @kropfgames
+/.github/CODEOWNERS @kropfgames
