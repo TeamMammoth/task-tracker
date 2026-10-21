@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "hey it's mammoth. your tool completed' >> /tmp/copilot-audit.log",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
