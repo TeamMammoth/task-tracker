@@ -1,0 +1,40 @@
+name: Outputs demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.generate.outputs.version }}
+
+    steps:
+      - name: Generate a version
+        id: generate
+        run: echo "version=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Read the step output
+        env:
+          VERSION: ${{ steps.generate.outputs.version }}
+        run: echo "Same job received version $VERSION"
+
+  release:
+    needs: prepare
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_MODE: preview
+
+    steps:
+      - name: Read the job output and runtime configuration
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          echo "Different job received version $VERSION"
+          echo "Release mode is $RELEASE_MODE"
+          if [ "$RELEASE_MODE" = "preview" ]; then
+            echo "Preview only. Nothing published."
+          fi
