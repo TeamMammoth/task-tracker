@@ -1,0 +1,14 @@
+name: Review demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Demo workflow"
