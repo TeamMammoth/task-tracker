@@ -1,11 +1,12 @@
 {
   "version": 1,
   "hooks": {
-    "postToolUse": [
+    "sessionStart": [
       {
         "type": "command",
-        "bash": "hey it's mammoth. your tool completed' >> /tmp/copilot-audit.log",
-        "timeoutSec": 5
+        "bash": "echo 'HOOK RAN: session started' >> copilot-audit.log",
+        "cwd": ".",
+        "timeoutSec": 10
       }
     ]
   }
