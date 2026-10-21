@@ -1,4 +1,4 @@
-name: Review demo - updated
+name: Review demo - example
 
 on:
   workflow_dispatch:
