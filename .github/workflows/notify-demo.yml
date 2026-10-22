@@ -1,0 +1,29 @@
+name: Notify maintainers demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulate a failed task
+        run: |
+          echo "::error::The demo task failed."
+          exit 1
+
+      - name: Notify maintainer
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            await github.rest.issues.create({
+              ...context.repo,
+              title: "Demo task failed",
+              body: `@YOUR_USERNAME The task failed. Please check the [workflow logs](${runUrl}).`
+            });
