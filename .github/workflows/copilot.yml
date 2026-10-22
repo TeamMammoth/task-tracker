@@ -1,0 +1,33 @@
+name: Copilot demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Run Copilot
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+        run: |
+          if [ -z "$COPILOT_GITHUB_TOKEN" ]; then
+            echo "::error::COPILOT_TOKEN secret is missing or empty. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+          npx --yes @github/copilot \
+            -p "Explain what GitHub Actions does in 2 sentences." \
+            --no-ask-user || {
+              status=$?
+              echo "::error::Copilot failed with exit code $status. Check the output above for details, then verify your token's Copilot Requests permission and your Copilot access."
+              exit "$status"
+            }
+        continue-on-error: false

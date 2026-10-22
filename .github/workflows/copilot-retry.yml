@@ -1,0 +1,39 @@
+name: Copilot retry demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Run agent task with retry
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+        run: |
+          for i in 1 2 3; do
+            echo "Attempt $i of 3"
+
+            if npx --yes @github/copilot \
+              -p "Explain GitHub Actions in 2 sentences." \
+              --no-ask-user; then
+              echo "Task succeeded."
+              exit 0
+            fi
+
+            echo "::warning::Attempt $i failed."
+
+            if [ "$i" -lt 3 ]; then
+              sleep 5
+            fi
+          done
+
+          echo "::error::Task failed after 3 attempts."
+          exit 1
