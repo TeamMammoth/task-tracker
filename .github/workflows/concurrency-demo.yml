@@ -1,0 +1,21 @@
+name: Concurrency demo
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulate a slow task
+        run: |
+          echo "Starting task"
+          sleep 60
+          echo "Task complete"

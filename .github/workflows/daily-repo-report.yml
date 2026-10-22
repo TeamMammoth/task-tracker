@@ -1,0 +1,27 @@
+name: Daily Repo Status Report
+on:
+  schedule:
+    - cron: "0 2 * * *"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate report
+        run: |
+          echo '{ "summary": "Daily status...", "links": [] }' > report.json
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-status-report
+          path: report.json
+
+      - name: Create issue (controlled output)
+        run: |
+          echo "Create issue from report.json"

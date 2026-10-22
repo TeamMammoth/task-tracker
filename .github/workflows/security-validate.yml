@@ -1,0 +1,12 @@
+name: Security Validation
+
+on:
+ workflow_run:
+  workflows: [CI Validation]
+  types: [completed]
+
+jobs:
+ validate:
+  runs-on: ubuntu-latest
+  steps:
+  - run: echo "Run security validation here."
