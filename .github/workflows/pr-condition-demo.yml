@@ -1,5 +1,4 @@
 name: PR condition demo
-
 on:
   pull_request:
   workflow_dispatch:
