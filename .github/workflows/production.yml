@@ -1,0 +1,13 @@
+name: Production example
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: Deploy
+        run: echo "Deploying to production"

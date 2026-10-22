@@ -1,27 +1,20 @@
-## Issue
-Closes #ISSUE_NUMBER
+## Objective
+What problem is being solved?
 
-## Approved plan
+## Plan
+1.
+2.
+3.
 
-[Paste or link the reviewed plan]
+## Evidence
+- CI run:
+- Scan outputs:
+- Relevant issue/alert:
 
-## Changes
+## Decisions and handoffs
+- Decision:
+- Rationale:
+- Next owner (if escalation needed):
 
-[Summarize the implemented behavior]
-
-## Validation evidence
-
-- Tests added:
-- Test command:
-- Actual result:
-- GitHub Actions run:
-
-## Scope check
-
-- Files changed:
-- Dependencies added:
-- Deviations from the plan:
-
-## Limitations
-
-[Anything not verified]
+## Risks and rollback
+-

@@ -1,0 +1,20 @@
+name: Agent report example
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create agent report
+        run: |
+          echo '{"status": "success", "message": "Agent task completed"}' > report.json
+
+      - name: Upload agent report
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-report
+          path: report.json
